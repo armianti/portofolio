@@ -1,34 +1,374 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Profil Mahasiswa</title>
-  <style>
-    body {font-family: Arial, sans-serif; background:#eef2f7; margin:0; color:#1e293b}
-    header {background:#164e63; color:white; text-align:center; padding:28px}
-    main {max-width:760px; margin:24px auto; background:white; padding:24px; border-radius:12px}
-    h2 {color:#0e7490}
-    footer {text-align:center; padding:16px}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Armianti — Portofolio Mahasiswa Informatika</title>
+<meta name="description" content="Portofolio Armianti, mahasiswa Informatika yang sedang mendalami administrasi website, hosting, dan publikasi website.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<script>document.documentElement.classList.add('js')</script>
+<style>
+:root{
+  --bg:#f4f0f4; --surface:#fffdfe; --ink:#2f2433; --muted:#6f6174; --line:#e4dbe6;
+  --accent:#8e5f86; --accent-soft:#eadff0; --sage:#a7b8a8; --sage-soft:#e3ebe3; --blush:#f1e1e5;
+  --deep:#3b2a42; --deep-ink:#f7f0f6; --deep-muted:#cdbdd2;
+  --head:'Cormorant Garamond',Georgia,'Times New Roman',serif;
+  --body:'Figtree','Segoe UI',Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{--bg:#191320; --surface:#231b2b; --ink:#f1e8f3; --muted:#b4a5ba; --line:#372c40;
+    --accent:#c79ac0; --accent-soft:#31243a; --sage:#8fa290; --sage-soft:#222c24; --blush:#33232b;
+    --deep:#120d17; --deep-ink:#f1e8f3; --deep-muted:#b9a9c0}
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:28px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);line-height:1.7;font-size:17px}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+.layout{display:grid;grid-template-columns:340px 1fr;max-width:1240px;margin:0 auto}
+
+/* Sidebar profil */
+aside{position:sticky;top:0;height:100vh;padding:44px 36px;display:flex;flex-direction:column;gap:26px;overflow:hidden}
+aside::before{content:"";position:absolute;width:360px;height:360px;border-radius:50%;left:-150px;top:-120px;background:radial-gradient(circle,color-mix(in srgb,var(--accent) 18%,transparent),transparent 70%);z-index:0}
+aside>*{position:relative;z-index:1}
+.photo{position:relative;width:200px}
+.frame{position:relative;aspect-ratio:3/4;border-radius:100px 100px 20px 20px;overflow:hidden;background:linear-gradient(165deg,#d3b0c8,#85587d);display:grid;place-items:center}
+.frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.frame .ini{font-family:var(--head);font-weight:600;font-size:5rem;color:#ffffffd0}
+.photo::before{content:"";position:absolute;inset:12px -12px -12px 12px;border-radius:100px 100px 20px 20px;border:1.5px solid var(--sage)}
+.sprig{position:absolute;left:-30px;bottom:-4px;width:64px;color:var(--sage);z-index:2}
+.who h1{font-family:var(--head);font-weight:700;font-size:2.4rem;line-height:1;margin:0 0 6px}
+.who p{margin:0;color:var(--muted);font-size:.95rem}
+aside nav ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+aside nav a{display:block;padding:7px 0 7px 16px;text-decoration:none;color:var(--muted);border-left:2px solid var(--line);transition:color .2s,border-color .2s,padding .25s}
+aside nav a:hover{color:var(--ink)}
+aside nav a.on{color:var(--ink);border-color:var(--accent);padding-left:22px;font-weight:600}
+.mini{margin-top:auto;font-size:.88rem;color:var(--muted)}
+
+/* Konten */
+main{padding:64px 56px 24px 24px;max-width:860px}
+section{padding-bottom:96px}
+h2{font-family:var(--head);font-weight:700;font-size:clamp(2rem,4vw,2.8rem);line-height:1.05;margin:0 0 12px}
+.intro{color:var(--muted);max-width:58ch;margin:0 0 34px}
+
+.tag{display:inline-block;font-size:.9rem;color:var(--accent);background:var(--accent-soft);padding:6px 14px;border-radius:99px;margin-bottom:22px;font-weight:500}
+.hero h2{font-size:clamp(2.8rem,6.4vw,4.8rem);line-height:.98;margin-bottom:18px}
+.hero .sub{font-family:var(--head);font-weight:600;font-size:clamp(1.4rem,2.6vw,1.9rem);line-height:1.25;max-width:26ch;margin:0 0 16px;color:var(--accent)}
+.hero .lead{max-width:54ch;color:var(--muted);margin:0 0 28px}
+.btns{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:56px}
+.btn{display:inline-block;padding:12px 24px;border-radius:12px;font-weight:500;text-decoration:none;transition:background .2s,border-color .2s}
+.btn.primary{background:var(--deep);color:var(--deep-ink)}
+.btn.primary:hover{background:var(--accent)}
+.btn.ghost{border:1px solid var(--line);background:var(--surface)}
+.btn.ghost:hover{border-color:var(--accent)}
+
+.about{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:start;padding-top:8px;border-top:1px solid var(--line)}
+.about h3{font-family:var(--head);font-size:1.9rem;margin:28px 0 12px}
+.about p{margin:0 0 14px;color:var(--muted)}
+.facts{margin:28px 0 0;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:4px 24px}
+.facts div{padding:16px 0;border-bottom:1px solid var(--line)}
+.facts div:last-child{border:0}
+.facts dt{font-size:.85rem;color:var(--muted)}
+.facts dd{margin:2px 0 0;font-family:var(--head);font-weight:700;font-size:1.3rem;line-height:1.2}
+
+/* Keahlian */
+.skill{display:grid;grid-template-columns:1fr auto;gap:4px 24px;padding:20px 18px;margin:0 -18px;border-radius:16px;border-bottom:1px solid var(--line)}
+.skill:first-of-type{border-top:1px solid var(--line)}
+.skill h3{margin:0;font-family:var(--head);font-weight:700;font-size:1.5rem;line-height:1.2}
+.skill p{margin:0;color:var(--muted);font-size:.96rem;grid-column:1}
+.level{grid-row:1/3;grid-column:2;align-self:center;text-align:right;font-size:.85rem;color:var(--muted)}
+.level div{display:flex;gap:5px;justify-content:flex-end;margin-bottom:6px}
+.level i{width:26px;height:6px;border-radius:99px;background:var(--line)}
+.level i.on{background:var(--accent)}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.chips span{padding:7px 16px;border-radius:99px;background:var(--sage-soft);font-size:.92rem}
+
+/* Proyek */
+.projects{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.proj{border-radius:22px;padding:28px;display:flex;flex-direction:column;justify-content:flex-end;min-height:230px;position:relative;overflow:hidden}
+.proj h3{margin:0 0 6px;font-family:var(--head);font-weight:700;font-size:1.65rem;line-height:1.1}
+.proj p{margin:0 0 14px;opacity:.82}
+.proj small{align-self:flex-start;padding:3px 12px;border-radius:99px;background:#ffffff80;font-weight:500;font-size:.8rem;color:#2f2433}
+.proj.big{grid-column:1/-1;min-height:280px;background:var(--deep);color:var(--deep-ink)}
+.proj.big::after{content:"</>";position:absolute;top:10px;right:26px;font-family:var(--head);font-weight:700;font-size:6rem;color:#ffffff14}
+.proj.big small{background:#ffffff1c;color:var(--deep-ink)}
+.proj.p2{background:var(--sage-soft)}
+.proj.p3{background:var(--blush)}
+@media (prefers-color-scheme:dark){.proj small{background:#ffffff14;color:var(--ink)}}
+
+/* Perjalanan */
+.line{border-left:1.5px solid var(--line);margin-left:6px;padding-left:32px;display:grid;gap:30px;max-width:640px}
+.step{position:relative}
+.step::before{content:"";position:absolute;left:-39px;top:9px;width:11px;height:11px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 5px var(--bg)}
+.step b{font-family:var(--head);font-weight:700;font-size:1.4rem}
+.step p{margin:0;color:var(--muted)}
+
+/* Tujuan + kontak */
+.goal{background:var(--deep);color:var(--deep-ink);border-radius:26px;padding:44px;display:grid;grid-template-columns:1fr 1fr;gap:36px}
+.goal h2{margin-bottom:12px}
+.goal p{color:var(--deep-muted);margin:0}
+.contact{display:grid;gap:10px;align-content:center}
+.contact a{display:flex;justify-content:space-between;gap:12px;padding:14px 18px;border-radius:12px;background:#ffffff0f;border:1px solid #ffffff22;text-decoration:none;transition:background .2s}
+.contact a:hover{background:#ffffff1c}
+.contact small{color:var(--deep-muted)}
+
+footer{padding:8px 56px 44px 24px;color:var(--muted);font-size:.92rem}
+
+/* Muncul halus saat digulir */
+.js .reveal{opacity:0;transform:translateY(36px);transition:opacity 1s cubic-bezier(.22,.7,.2,1),transform 1s cubic-bezier(.22,.7,.2,1);transition-delay:calc(var(--i,0) * 130ms)}
+.js .reveal.from-left{transform:translateX(-36px)}
+.js .reveal.from-right{transform:translateX(36px)}
+.js .reveal.show{opacity:1;transform:none}
+
+/* Efek timbul saat kursor diarahkan */
+.js .reveal.done{transition:transform .35s cubic-bezier(.22,.7,.2,1),box-shadow .35s ease,background .35s ease,border-color .35s ease,opacity .35s;transition-delay:0s}
+.btn,.chips span,.contact a,.frame{transition:transform .3s cubic-bezier(.22,.7,.2,1),box-shadow .3s ease,background .2s,border-color .2s}
+@media (hover:hover){
+  :root{--lift:0 18px 34px -14px color-mix(in srgb,var(--deep) 38%,transparent);--lift-s:0 10px 22px -10px color-mix(in srgb,var(--deep) 30%,transparent)}
+  .js .reveal.done.skill:hover{transform:translateY(-5px);background:var(--surface);border-bottom-color:transparent;box-shadow:var(--lift-s)}
+  .js .reveal.done.proj:hover{transform:translateY(-8px);box-shadow:var(--lift)}
+  .js .reveal.done.facts:hover{transform:translateY(-5px);box-shadow:var(--lift-s)}
+  .js .reveal.done.step:hover{transform:translateX(8px)}
+  .js .reveal.done.step:hover::before{transform:scale(1.35)}
+  .step::before{transition:transform .3s ease}
+  .btn:hover{transform:translateY(-3px);box-shadow:var(--lift-s)}
+  .chips span:hover{transform:translateY(-4px);background:var(--accent-soft);box-shadow:var(--lift-s)}
+  .contact a:hover{transform:translateY(-4px);box-shadow:0 14px 26px -14px #000a}
+  .photo:hover .frame{transform:translateY(-6px);box-shadow:var(--lift)}
+}
+@media (prefers-reduced-motion:reduce){
+  .js .reveal.done:hover,.btn:hover,.chips span:hover,.contact a:hover,.photo:hover .frame{transform:none!important}
+}
+
+@media (max-width:960px){
+  .layout{grid-template-columns:1fr}
+  aside{position:relative;height:auto;padding:36px 24px 8px;flex-direction:row;flex-wrap:wrap;align-items:center;gap:22px}
+  .photo{width:110px}
+  .photo::before{display:none}
+  .sprig,.mini{display:none}
+  .frame{border-radius:55px 55px 14px 14px}
+  .frame .ini{font-size:3rem}
+  aside nav{width:100%;overflow-x:auto}
+  aside nav ul{display:flex;gap:8px;grid-auto-flow:column}
+  aside nav a{border:1px solid var(--line);border-radius:99px;padding:6px 16px;white-space:nowrap}
+  aside nav a.on{padding-left:16px;background:var(--accent-soft);border-color:var(--accent)}
+  main{padding:32px 24px 8px}
+  footer{padding:8px 24px 40px}
+}
+@media (max-width:640px){
+  .about,.projects,.goal{grid-template-columns:1fr}
+  .skill{grid-template-columns:1fr}
+  .level{grid-row:auto;grid-column:1;text-align:left;margin-top:10px}
+  .level div{justify-content:flex-start}
+  .goal{padding:30px 22px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important;scroll-behavior:auto}
+  .js .reveal{opacity:1;transform:none}
+}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Website Profil Mahasiswa</h1>
-    <p>Praktik Administrasi Website</p>
-  </header>
-  <main>
-    <h2>Profil Singkat</h2>
-    <p>Halo, saya [Nama Mahasiswa]. Saya sedang belajar memublikasikan website.</p>
-    <h2>Informasi</h2>
+<div class="layout">
+
+<aside>
+  <div class="photo">
+    <div class="frame">
+      <span class="ini" aria-hidden="true">A</span>
+      <img src="armii.png.jpg" alt="Foto profil Armianti" onerror="this.style.display='none'">
+    </div>
+    <svg class="sprig" viewBox="0 0 90 120" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+      <path d="M45 118C45 86 47 52 60 8"/><path d="M46 98C32 94 24 84 22 70c14 2 23 12 24 28z"/>
+      <path d="M48 76C62 72 70 62 72 48c-14 2-23 12-24 28z"/><path d="M51 52C39 48 32 40 30 28c12 2 20 10 21 24z"/>
+    </svg>
+  </div>
+  <div class="who">
+    <h1>Armianti</h1>
+    <p>Mahasiswa Informatika</p>
+  </div>
+  <nav aria-label="Menu utama">
     <ul>
-      <li>Program Studi: Informatika</li>
-      <li>Mata Kuliah: Administrasi Website</li>
-      <li>Topik: Hosting dan publikasi website</li>
+      <li><a href="#tentang" class="on">Tentang</a></li>
+      <li><a href="#keahlian">Keahlian</a></li>
+      <li><a href="#proyek">Proyek</a></li>
+      <li><a href="#perjalanan">Perjalanan</a></li>
+      <li><a href="#kontak">Kontak</a></li>
     </ul>
-    <h2>Tujuan</h2>
-    <p>Halaman ini dibuat sebagai latihan mengunggah HTML ke layanan hosting.</p>
-  </main>
-  <footer>Website latihan mahasiswa — 2026</footer>
+  </nav>
+  <div class="mini">Portofolio Armi</div>
+</aside>
+
+<div>
+<main>
+
+  <section id="tentang">
+    <div class="hero">
+      <span class="tag reveal">Portofolio Armi</span>
+      <h2 class="reveal" style="--i:1">Halo, saya Armianti.</h2>
+      <p class="sub reveal" style="--i:2">Mahasiswa Informatika yang belajar membawa website dari laptop ke internet.</p>
+      <p class="lead reveal" style="--i:3">Saya sedang mendalami hosting dan publikasi website: mulai dari menulis halaman, mengunggahnya, sampai memastikan halaman itu bisa dibuka siapa saja.</p>
+      <div class="btns reveal" style="--i:4">
+        <a class="btn primary" href="#proyek">Lihat proyek</a>
+        <a class="btn ghost" href="#kontak">Hubungi saya</a>
+      </div>
+    </div>
+    <div class="about">
+      <div class="reveal from-left">
+        <h3>Profil singkat</h3>
+        <p>Halo, saya Armianti. Saya sedang belajar memublikasikan website, dan halaman ini adalah bagian dari prosesnya.</p>
+        <p>Saya senang melihat sesuatu yang awalnya hanya berupa file di komputer berubah menjadi halaman yang bisa dibuka lewat tautan. Karena itu, saya fokus memahami cara kerja hosting, struktur file, dan langkah publikasi yang rapi.</p>
+        <p>Tujuan saya: membangun dasar yang kuat di administrasi website agar bisa mengelola dan merawat website secara mandiri.</p>
+      </div>
+      <dl class="facts reveal from-right" style="--i:2">
+        <div><dt>Program studi</dt><dd>Informatika</dd></div>
+        <div><dt>Mata kuliah</dt><dd>Administrasi Website</dd></div>
+        <div><dt>Topik saat ini</dt><dd>Hosting dan publikasi website</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section id="keahlian">
+    <h2 class="reveal">Yang sedang saya asah</h2>
+    <p class="intro reveal">Saya masih belajar, jadi level di bawah ini jujur menggambarkan posisi saya sekarang.</p>
+    <div class="skill reveal">
+      <h3>HTML &amp; CSS</h3>
+      <p>Menyusun struktur halaman dan tampilan yang rapi, responsif di layar ponsel maupun komputer.</p>
+      <div class="level"><div><i class="on"></i><i class="on"></i><i class="on"></i><i></i></div>Menengah</div>
+    </div>
+    <div class="skill reveal">
+      <h3>Hosting &amp; publikasi</h3>
+      <p>Mengunggah file ke layanan hosting dan memastikan website tampil dengan benar.</p>
+      <div class="level"><div><i class="on"></i><i class="on"></i><i></i><i></i></div>Berkembang</div>
+    </div>
+    <div class="skill reveal">
+      <h3>Struktur file &amp; aset</h3>
+      <p>Mengatur nama file, folder, dan gambar supaya tautan tidak rusak setelah diunggah.</p>
+      <div class="level"><div><i class="on"></i><i class="on"></i><i></i><i></i></div>Berkembang</div>
+    </div>
+    <div class="skill reveal">
+      <h3>Desain tampilan</h3>
+      <p>Memilih warna dan tipografi yang nyaman dibaca dan konsisten di seluruh halaman.</p>
+      <div class="level"><div><i class="on"></i><i class="on"></i><i></i><i></i></div>Berkembang</div>
+    </div>
+    <div class="chips reveal" aria-label="Topik yang dipelajari">
+      <span>Domain &amp; DNS</span><span>FTP / unggah file</span><span>Git &amp; GitHub</span><span>Keamanan dasar (HTTPS)</span><span>Kecepatan halaman</span>
+    </div>
+  </section>
+
+  <section id="proyek">
+    <h2 class="reveal">Proyek</h2>
+    <p class="intro reveal">Latihan yang saya kerjakan selama belajar administrasi website.</p>
+    <div class="projects">
+      <article class="proj big reveal">
+        <h3>Website Profil Mahasiswa</h3>
+        <p>Halaman profil yang dibuat sebagai latihan mengunggah HTML ke layanan hosting. Dari sinilah portofolio ini berkembang.</p>
+        <small>Selesai · 2026</small>
+      </article>
+      <article class="proj p2 reveal" style="--i:1">
+        <h3>Publikasi ke hosting</h3>
+        <p>Mencoba alur lengkap: menyiapkan file, mengunggah, lalu menguji tautan publik.</p>
+        <small>Latihan</small>
+      </article>
+      <article class="proj p3 reveal" style="--i:2">
+        <h3>Portofolio responsif</h3>
+        <p>Menyempurnakan tampilan agar nyaman dibuka di ponsel, tablet, dan laptop.</p>
+        <small>Sedang berjalan</small>
+      </article>
+    </div>
+  </section>
+
+  <section id="perjalanan">
+    <h2 class="reveal">Perjalanan belajar</h2>
+    <p class="intro reveal">Urutan langkah yang sedang dan akan saya tempuh.</p>
+    <div class="line">
+      <div class="step reveal from-left"><b>Mulai kuliah Informatika</b><p>Mengenal dasar pemrograman dan cara kerja web.</p></div>
+      <div class="step reveal from-left" style="--i:1"><b>Administrasi Website</b><p>Belajar hosting dan publikasi website lewat praktik langsung.</p></div>
+      <div class="step reveal from-left" style="--i:2"><b>Membangun portofolio</b><p>Mengumpulkan proyek latihan menjadi satu halaman yang bisa dibagikan.</p></div>
+      <div class="step reveal from-left" style="--i:3"><b>Berikutnya</b><p>Mendalami domain, HTTPS, dan pengelolaan website yang lebih besar.</p></div>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <div class="goal reveal">
+      <div>
+        <h2>Tujuan saya</h2>
+        <p>Halaman ini dibuat sebagai latihan mengunggah HTML ke layanan hosting. Ke depan, saya ingin mampu mengelola website dari awal sampai tayang. Mari terhubung bila ada kesempatan belajar atau berkolaborasi.</p>
+      </div>
+      <div class="contact">
+        <!-- Ganti dengan kontak asli kamu -->
+        <a href="mailto:emailkamu@contoh.com">Email <small>emailkamu@contoh.com</small></a>
+        <a href="https://github.com/usernamekamu" target="_blank" rel="noopener">GitHub <small>github.com/usernamekamu</small></a>
+        <a href="https://linkedin.com/in/usernamekamu" target="_blank" rel="noopener">LinkedIn <small>linkedin.com/in/usernamekamu</small></a>
+      </div>
+    </div>
+  </section>
+
+</main>
+<footer>Website latihan mahasiswa — 2026 · Armianti</footer>
+</div>
+
+</div>
+
+<script>
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){ els.forEach(function(e){e.classList.add('show','done')}); }
+  else{
+    var io = new IntersectionObserver(function(items){
+      items.forEach(function(i){
+        if(i.isIntersecting){
+          var t = i.target;
+          t.classList.add('show'); io.unobserve(t);
+          var d = parseFloat(getComputedStyle(t).getPropertyValue('--i')) || 0;
+          setTimeout(function(){ t.classList.add('done'); }, 1100 + d*130);
+        }
+      });
+    }, {threshold:0.15, rootMargin:'0px 0px -50px 0px'});
+    els.forEach(function(e){ io.observe(e); });
+  }
+  /* Menu aktif mengikuti bagian yang sedang dibaca */
+  var links = document.querySelectorAll('aside nav a');
+  var secs = document.querySelectorAll('main section');
+  if('IntersectionObserver' in window){
+    var so = new IntersectionObserver(function(items){
+      items.forEach(function(i){
+        if(i.isIntersecting){
+          links.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#' + i.target.id); });
+        }
+      });
+    }, {rootMargin:'-35% 0px -55% 0px'});
+    secs.forEach(function(s){ so.observe(s); });
+  }
+})();
+</script>
+
+<script>
+/* Menu berpindah bagian dengan mulus, alamat di browser tetap bersih (tanpa #) */
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function go(id){
+    var t = document.getElementById(id);
+    if(!t) return;
+    t.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id = a.getAttribute('href').slice(1);
+      if(id === 'atas'){ e.preventDefault(); window.scrollTo({top:0, behavior: reduce ? 'auto' : 'smooth'}); }
+      else if(document.getElementById(id)){ e.preventDefault(); go(id); }
+      if(location.hash){ history.replaceState(null, '', location.pathname + location.search); }
+    });
+  });
+  /* Jika halaman dibuka dengan alamat yang sudah memuat #, bersihkan */
+  if(location.hash){
+    var id = location.hash.slice(1);
+    history.replaceState(null, '', location.pathname + location.search);
+    window.addEventListener('load', function(){ go(id); });
+  }
+})();
+</script>
 </body>
 </html>
